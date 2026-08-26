@@ -1,10 +1,10 @@
-Rajgir Marathon Website & Mobile Application
+MettleMiles Website & Mobile Application
 
 Product Requirement Document (PRD)
 
 Project Name
 
-Rajgir Marathon
+MettleMiles
 
 Tagline
 

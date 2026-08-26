@@ -1,7 +1,7 @@
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LandingPage from "./pages/landingPage";
+import ComingSoonPage from "./pages/ComingSoonPage";
 import VmEditions from "./pages/VmEditions/Vm_editions";
 import TwelfthEdition from "./pages/VmEditions/Tab/12thedition";
 import EleventhEdition from "./pages/VmEditions/Tab/11thedition";
@@ -108,7 +108,7 @@ function App() {
         theme="light"
       />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<ComingSoonPage />} />
         <Route path="/vm" element={<VmEditions />}>
           <Route index element={<Navigate to="12th-edition" />} />
           <Route path="12th-edition" element={<TwelfthEdition />} />

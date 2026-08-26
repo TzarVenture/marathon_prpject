@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.8bfbd3ef.css",
-    "main.js": "/static/js/main.5b45d502.js",
+    "main.css": "/static/css/main.ac1c5c2b.css",
+    "main.js": "/static/js/main.4f59a1e8.js",
     "static/media/1697437283.jpg": "/static/media/1697437283.79309c89497363f1d426.jpg",
     "static/media/1609224933.jpg": "/static/media/1609224933.28924894e12d7f3f14d7.jpg",
     "static/media/1734431653.jpg": "/static/media/1734431653.536570da339cbb4f1a00.jpg",
@@ -9,7 +9,6 @@
     "static/media/seema_gupta.jpg": "/static/media/seema_gupta.883fe742d869bf731379.jpg",
     "static/media/1697790842.jpg": "/static/media/1697790842.e861b536470fb1e67153.jpg",
     "static/media/1672809195.jpg": "/static/media/1672809195.c6a06296be86227295c6.jpg",
-    "static/media/banner.jpg": "/static/media/banner.74af0430ea2cb28b0c35.jpg",
     "static/media/1670487989.jpg": "/static/media/1670487989.a5bc1f8bab94c44c071f.jpg",
     "static/media/1672808880.jpg": "/static/media/1672808880.11dffccde74491ba39cd.jpg",
     "static/media/pm_message_2021.pdf": "/static/media/pm_message_2021.7bd2b90ccd78c53dbe94.pdf",
@@ -143,11 +142,11 @@
     "static/media/googleplay.png": "/static/media/googleplay.eac9642e490a4c8e8686.png",
     "static/media/26.jpg": "/static/media/26.9b6d4466af68530f0cd1.jpg",
     "index.html": "/index.html",
-    "main.8bfbd3ef.css.map": "/static/css/main.8bfbd3ef.css.map",
-    "main.5b45d502.js.map": "/static/js/main.5b45d502.js.map"
+    "main.ac1c5c2b.css.map": "/static/css/main.ac1c5c2b.css.map",
+    "main.4f59a1e8.js.map": "/static/js/main.4f59a1e8.js.map"
   },
   "entrypoints": [
-    "static/css/main.8bfbd3ef.css",
-    "static/js/main.5b45d502.js"
+    "static/css/main.ac1c5c2b.css",
+    "static/js/main.4f59a1e8.js"
   ]
 }
