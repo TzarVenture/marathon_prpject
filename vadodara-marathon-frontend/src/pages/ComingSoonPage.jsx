@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 const IconMapPin = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -99,13 +99,9 @@ const ComingSoonPage = () => {
         </div>
 
         <div
-          className="flex items-center gap-2 px-4 py-2"
+          className="flex items-center px-4 py-2"
           style={{ border: "1.5px solid #e8540a", borderRadius: "999px", background: "#fff8f5" }}
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#e8540a" }} />
-            <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#e8540a" }} />
-          </span>
           <span className="text-xs sm:text-sm font-bold tracking-widest uppercase" style={{ color: "#e8540a" }}>
             Coming Soon
           </span>
@@ -114,7 +110,7 @@ const ComingSoonPage = () => {
 
       {/* HERO */}
       <section
-        className="relative flex-1 flex flex-col justify-center overflow-hidden"
+        className="relative flex-1 flex flex-col justify-center items-center overflow-hidden py-10 sm:py-16"
         style={{ minHeight: "calc(100vh - 68px)" }}
       >
         {/* Desktop background image */}
@@ -124,11 +120,11 @@ const ComingSoonPage = () => {
             alt="Rajgir Marathon Hero Desktop"
             className="w-full h-full object-cover object-center"
           />
-          {/* Left-to-right dark gradient: dark left, fading to transparent right */}
+          {/* Centered dark gradient overlay for optimal text contrast across the center */}
           <div
             className="absolute inset-0"
             style={{
-              background: "linear-gradient(to right, rgba(5,3,1,0.88) 0%, rgba(5,3,1,0.72) 30%, rgba(5,3,1,0.38) 60%, rgba(5,3,1,0.05) 100%)"
+              background: "radial-gradient(ellipse at center, rgba(5,3,1,0.76) 0%, rgba(5,3,1,0.84) 55%, rgba(5,3,1,0.92) 100%)"
             }}
           />
         </div>
@@ -142,145 +138,153 @@ const ComingSoonPage = () => {
           />
           <div
             className="absolute inset-0"
-            style={{ background: "rgba(5,3,1,0.72)" }}
+            style={{ background: "rgba(5,3,1,0.78)" }}
           />
         </div>
 
-        {/* ALL CONTENT: left-aligned column */}
-        <div className="relative z-10 w-full px-5 sm:px-10 lg:px-16 py-8 sm:py-10">
-          <div className="max-w-2xl">
+        {/* ALL CONTENT: centered column */}
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 py-6 sm:py-8 flex flex-col items-center text-center">
+          
+          {/* Location chip */}
+          <div
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 mb-4"
+            style={{
+              background: "rgba(255,243,237,0.12)",
+              border: "1px solid rgba(244,185,138,0.45)",
+              borderRadius: "999px",
+              color: "#f4b98a",
+              fontSize: "11px",
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          >
+            <IconMapPin />
+            <span>Rajgir, Bihar, India</span>
+          </div>
 
-            {/* Location chip */}
-            <div
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 mb-4"
-              style={{
-                background: "rgba(255,243,237,0.12)",
-                border: "1px solid rgba(244,185,138,0.45)",
-                borderRadius: "999px",
-                color: "#f4b98a",
-                fontSize: "11px",
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              <IconMapPin />
-              <span>Rajgir, Bihar, India</span>
-            </div>
+          {/* Tagline */}
+          <p className="text-xs sm:text-sm font-semibold uppercase mb-2" style={{ color: "#f07040", letterSpacing: "0.14em" }}>
+            Run Through 2,500 Years of History
+          </p>
 
-            {/* Tagline */}
-            <p className="text-xs sm:text-sm font-semibold uppercase mb-2" style={{ color: "#f07040", letterSpacing: "0.14em" }}>
-              Run Through 2,500 Years of History
-            </p>
-
-            {/* Main heading */}
-            <h1 className="font-black leading-none tracking-tight mb-0" style={{ fontSize: "clamp(3.2rem,9vw,7rem)", color: "#ffffff" }}>
+          {/* Main heading */}
+          <div className="mb-4">
+            <h1 className="font-black leading-none tracking-tight mb-1" style={{ fontSize: "clamp(3.2rem,8.5vw,6.5rem)", color: "#ffffff" }}>
               RAJGIR
             </h1>
-            <h2 className="font-black leading-none tracking-tight mb-5" style={{ fontSize: "clamp(2.6rem,7.5vw,5.5rem)", color: "#e8540a" }}>
+            <h2 className="font-black leading-none tracking-tight" style={{ fontSize: "clamp(2.6rem,7vw,5rem)", color: "#e8540a" }}>
               MARATHON
             </h2>
+          </div>
 
-            {/* Sub-tagline pill */}
-            <div className="inline-block px-5 py-2 mb-6" style={{ background: "#e8540a", borderRadius: "999px" }}>
-              <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase" style={{ color: "#ffffff" }}>
+          {/* Prominent Centered COMING SOON Banner */}
+          <div
+            className="inline-flex items-center justify-center px-7 sm:px-9 py-2.5 sm:py-3 mb-6"
+            style={{
+              background: "linear-gradient(135deg, rgba(232,84,10,0.92) 0%, rgba(196,74,0,0.96) 100%)",
+              border: "1.5px solid rgba(255,255,255,0.3)",
+              borderRadius: "999px",
+              boxShadow: "0 8px 30px rgba(232,84,10,0.45)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            <span className="text-sm sm:text-lg font-black tracking-[0.22em] uppercase text-white">
+              Coming Soon
+            </span>
+          </div>
+
+          {/* Sub-tagline pill & Venue */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+            <div className="inline-flex items-center px-4 py-2" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "999px", backdropFilter: "blur(8px)" }}>
+              <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-white">
                 Run Where History Lives
               </span>
             </div>
-
-            {/* Key Info pills */}
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              {[
-                { icon: <IconCalendar />, text: "Coming Soon - 2026" },
-                { icon: <IconStadium />,  text: "Rajgir Sports Complex" },
-              ].map(({ icon, text }, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 px-4 py-2.5"
-                  style={{
-                    background: "rgba(255,255,255,0.1)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    borderRadius: "12px",
-                    backdropFilter: "blur(8px)",
-                    color: "#ffffff",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                  }}
-                >
-                  <span style={{ color: "#e8540a" }}>{icon}</span>
-                  <span>{text}</span>
-                </div>
-              ))}
+            <div
+              className="flex items-center gap-2 px-4 py-2"
+              style={{
+                background: "rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                borderRadius: "999px",
+                backdropFilter: "blur(8px)",
+                color: "#ffffff",
+                fontSize: "13px",
+                fontWeight: 600,
+              }}
+            >
+              <span style={{ color: "#e8540a" }}><IconStadium /></span>
+              <span>Rajgir Sports Complex</span>
             </div>
-
-            {/* Info cards: side by side below text */}
-            <div className="flex flex-col sm:flex-row gap-4">
-
-              {/* Race Categories */}
-              <div
-                className="rounded-2xl p-4 flex-1"
-                style={{
-                  background: "rgba(255,255,255,0.07)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  backdropFilter: "blur(20px)",
-                }}
-              >
-                <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "rgba(255,255,255,0.45)" }}>
-                  Race Categories
-                </p>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {raceCategories.map((cat, idx) => (
-                    <div
-                      key={idx}
-                      className="flex flex-col items-start px-2.5 py-2"
-                      style={{
-                        background: "rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(255,255,255,0.09)",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      <span className="font-black text-xs leading-tight" style={{ color: "#ffffff" }}>
-                        {cat.dist}
-                      </span>
-                      <span className="text-xs font-medium mt-0.5" style={{ color: "rgba(255,255,255,0.48)" }}>
-                        {cat.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Event Highlights */}
-              <div
-                className="rounded-2xl p-4 flex-1"
-                style={{
-                  background: "rgba(255,255,255,0.07)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  backdropFilter: "blur(20px)",
-                }}
-              >
-                <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "rgba(255,255,255,0.45)" }}>
-                  Event Highlights
-                </p>
-                <div className="flex flex-col gap-2.5">
-                  {highlights.map(({ Icon, label }, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <span
-                        className="flex items-center justify-center w-7 h-7 rounded-lg flex-shrink-0"
-                        style={{ background: "rgba(232,84,10,0.18)", color: "#e8540a" }}
-                      >
-                        <Icon />
-                      </span>
-                      <span className="text-xs sm:text-sm font-semibold" style={{ color: "rgba(255,255,255,0.82)" }}>
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
           </div>
+
+          {/* Info cards: side by side, centered */}
+          <div className="w-full max-w-3xl flex flex-col sm:flex-row gap-4 text-left">
+
+            {/* Race Categories */}
+            <div
+              className="rounded-2xl p-4 flex-1"
+              style={{
+                background: "rgba(255,255,255,0.07)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                backdropFilter: "blur(20px)",
+              }}
+            >
+              <p className="text-xs font-bold tracking-widest uppercase mb-3 text-center sm:text-left" style={{ color: "rgba(255,255,255,0.45)" }}>
+                Race Categories
+              </p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {raceCategories.map((cat, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col items-start px-2.5 py-2"
+                    style={{
+                      background: "rgba(255,255,255,0.06)",
+                      border: "1px solid rgba(255,255,255,0.09)",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <span className="font-black text-xs leading-tight" style={{ color: "#ffffff" }}>
+                      {cat.dist}
+                    </span>
+                    <span className="text-xs font-medium mt-0.5" style={{ color: "rgba(255,255,255,0.48)" }}>
+                      {cat.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Event Highlights */}
+            <div
+              className="rounded-2xl p-4 flex-1"
+              style={{
+                background: "rgba(255,255,255,0.07)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                backdropFilter: "blur(20px)",
+              }}
+            >
+              <p className="text-xs font-bold tracking-widest uppercase mb-3 text-center sm:text-left" style={{ color: "rgba(255,255,255,0.45)" }}>
+                Event Highlights
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {highlights.map(({ Icon, label }, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <span
+                      className="flex items-center justify-center w-7 h-7 rounded-lg flex-shrink-0"
+                      style={{ background: "rgba(232,84,10,0.18)", color: "#e8540a" }}
+                    >
+                      <Icon />
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold" style={{ color: "rgba(255,255,255,0.82)" }}>
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
