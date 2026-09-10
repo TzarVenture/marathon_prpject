@@ -6,14 +6,6 @@ const IconMapPin = () => (
     <circle cx="12" cy="10" r="3" />
   </svg>
 );
-const IconCalendar = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="3" ry="3" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
-);
 const IconStadium = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
     <ellipse cx="12" cy="10" rx="10" ry="4" />
@@ -85,33 +77,51 @@ const ComingSoonPage = () => {
       className="relative min-h-screen w-full overflow-x-hidden flex flex-col"
     >
 
-      {/* NAVBAR - white bg to match logo */}
+      {/* NAVBAR - Transparent floating header */}
       <header
-        className="relative z-30 w-full px-5 sm:px-10 py-3 flex items-center justify-between"
-        style={{ background: "#ffffff", borderBottom: "1px solid #ebe9e4" }}
+        className="absolute top-0 left-0 z-30 w-full px-5 sm:px-10 py-4 flex items-center justify-between"
+        style={{
+          background: "linear-gradient(to bottom, rgba(5,3,1,0.65) 0%, rgba(5,3,1,0) 100%)",
+        }}
       >
-        <div className="flex items-center">
-          <img
-            src="/images/mainLogo.png"
-            alt="Rajgir Marathon Logo"
-            className="h-14 sm:h-16 w-auto object-contain"
-          />
+        <div className="flex items-center gap-3">
+          <div className="bg-white/95 rounded-xl p-1 shadow-lg shadow-black/30 flex items-center justify-center backdrop-blur-sm">
+            <img
+              src="/images/mainLogo.png"
+              alt="Rajgir Marathon Logo"
+              className="h-11 sm:h-14 w-auto object-contain rounded-lg"
+            />
+          </div>
+          <div className="hidden sm:flex flex-col text-left">
+            <span className="text-white font-black text-base sm:text-lg tracking-wider leading-tight">
+              RAJGIR MARATHON
+            </span>
+            <span className="text-[#f4b98a] text-[10px] sm:text-xs font-semibold tracking-widest uppercase">
+              Run Through History
+            </span>
+          </div>
         </div>
 
         <div
-          className="flex items-center px-4 py-2"
-          style={{ border: "1.5px solid #e8540a", borderRadius: "999px", background: "#fff8f5" }}
+          className="flex items-center px-4 py-1.5"
+          style={{
+            border: "1px solid rgba(255, 255, 255, 0.25)",
+            borderRadius: "999px",
+            background: "rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(12px)",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
+          }}
         >
-          <span className="text-xs sm:text-sm font-bold tracking-widest uppercase" style={{ color: "#e8540a" }}>
-            Coming Soon
+          <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-white">
+            Edition 2026
           </span>
         </div>
       </header>
 
       {/* HERO */}
       <section
-        className="relative flex-1 flex flex-col justify-center items-center overflow-hidden py-10 sm:py-16"
-        style={{ minHeight: "calc(100vh - 68px)" }}
+        className="relative flex-1 flex flex-col justify-center items-center overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-16"
+        style={{ minHeight: "100vh" }}
       >
         {/* Desktop background image */}
         <div className="absolute inset-0 hidden sm:block">
@@ -169,7 +179,7 @@ const ComingSoonPage = () => {
           </p>
 
           {/* Main heading */}
-          <div className="mb-4">
+          <div className="mb-2">
             <h1 className="font-black leading-none tracking-tight mb-1" style={{ fontSize: "clamp(3.2rem,8.5vw,6.5rem)", color: "#ffffff" }}>
               RAJGIR
             </h1>
@@ -178,20 +188,28 @@ const ComingSoonPage = () => {
             </h2>
           </div>
 
-          {/* Prominent Centered COMING SOON Banner */}
-          <div
-            className="inline-flex items-center justify-center px-7 sm:px-9 py-2.5 sm:py-3 mb-6"
-            style={{
-              background: "linear-gradient(135deg, rgba(232,84,10,0.92) 0%, rgba(196,74,0,0.96) 100%)",
-              border: "1.5px solid rgba(255,255,255,0.3)",
-              borderRadius: "999px",
-              boxShadow: "0 8px 30px rgba(232,84,10,0.45)",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <span className="text-sm sm:text-lg font-black tracking-[0.22em] uppercase text-white">
-              Coming Soon
-            </span>
+          {/* HIGH-VISIBILITY HERO "COMING SOON" SHOWCASE */}
+          <div className="my-6 sm:my-8 flex flex-col items-center">
+            <div
+              className="relative inline-flex items-center justify-center px-6 sm:px-14 py-2.5 sm:py-4"
+              style={{
+                background: "linear-gradient(135deg, #ff6b1a 0%, #e8540a 50%, #c44a00 100%)",
+                border: "2px solid rgba(255, 255, 255, 0.5)",
+                borderRadius: "999px",
+                boxShadow: "0 0 45px rgba(232, 84, 10, 0.8), 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.5)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              <span
+                className="font-black tracking-[0.16em] sm:tracking-[0.22em] uppercase text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.7)]"
+                style={{ fontSize: "clamp(1.15rem, 4vw, 2.5rem)" }}
+              >
+                COMING SOON
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm font-extrabold tracking-[0.25em] uppercase text-[#f4b98a] mt-3 drop-shadow-md">
+              Official Registrations Opening Soon
+            </p>
           </div>
 
           {/* Sub-tagline pill & Venue */}

@@ -82,8 +82,12 @@ function App() {
               link.rel = 'icon';
               document.head.appendChild(link);
             }
-            const baseURL = process.env.REACT_APP_API_BASE_URL || "http://localhost:4000";
-            link.href = baseURL + res.data.faviconUrl;
+            if (res.data.faviconUrl.startsWith("/images/")) {
+              link.href = res.data.faviconUrl;
+            } else {
+              const baseURL = process.env.REACT_APP_API_BASE_URL || "http://localhost:4000";
+              link.href = baseURL + res.data.faviconUrl;
+            }
           }
         }
       } catch (err) {
