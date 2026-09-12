@@ -1,127 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import ComingSoonHeader from "../Component/ComingSoonHeader";
+import ComingSoonFooter from "../Component/Footer/ComingSoonFooter";
+import {
+  FaMapMarkerAlt,
+  FaRunning,
+  FaStopwatch,
+  FaMedkit,
+  FaTint,
+  FaChevronRight,
+  FaMedal,
+  FaTshirt,
+  FaCertificate,
+  FaMusic,
+  FaClipboardList,
+  FaUserTie,
+  FaStore,
+  FaVideo,
+  FaCamera,
+  FaShareAlt,
+  FaFlagCheckered,
+  FaArrowRight,
+  FaLandmark,
+  FaUsers,
+} from "react-icons/fa";
+import { FaRoute, FaBowlFood } from "react-icons/fa6";
 
-const IconMapPin = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
-const IconStadium = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <ellipse cx="12" cy="10" rx="10" ry="4" />
-    <path d="M2 10v4c0 2.2 4.5 4 10 4s10-1.8 10-4v-4" />
-  </svg>
-);
-const IconLandmark = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="3" y1="22" x2="21" y2="22" />
-    <line x1="6" y1="18" x2="6" y2="11" />
-    <line x1="10" y1="18" x2="10" y2="11" />
-    <line x1="14" y1="18" x2="14" y2="11" />
-    <line x1="18" y1="18" x2="18" y2="11" />
-    <polygon points="12 2 20 7 4 7" />
-  </svg>
-);
-const IconGlobe = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <line x1="2" y1="12" x2="22" y2="12" />
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-  </svg>
-);
-const IconUtensils = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-    <path d="M7 2v20" />
-    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-  </svg>
-);
-const IconMusic = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 18V5l12-2v13" />
-    <circle cx="6" cy="18" r="3" />
-    <circle cx="18" cy="16" r="3" />
-  </svg>
-);
-const IconUsers = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
-
-const raceCategories = [
-  { dist: "42.195 KM", name: "Full Marathon" },
-  { dist: "21.1 KM",  name: "Half Marathon" },
-  { dist: "10 KM",    name: "Heritage Run"  },
-  { dist: "5 KM",     name: "Family Run"    },
-  { dist: "3 KM",     name: "Kids Run"      },
-  { dist: "Corporate",name: "Challenge"     },
-  { dist: "Defence &",name: "Police Run"    },
-];
-
-const highlights = [
-  { Icon: IconLandmark, label: "Heritage Route"        },
-  { Icon: IconGlobe,    label: "Tourism & Culture"     },
-  { Icon: IconUtensils, label: "Bihar Food Fest"        },
-  { Icon: IconMusic,    label: "Music & Entertainment"  },
-  { Icon: IconUsers,    label: "Community Engagement"   },
+const eventHighlights = [
+  {
+    id: "heritage-route",
+    title: "Heritage Route",
+    icon: FaRoute,
+    iconBg: "bg-gradient-to-br from-[#d49a37]/25 to-[#991b1b]/35 text-[#d49a37] border-[#cca043]/40",
+    glowColor: "group-hover:shadow-[0_12px_32px_rgba(212,154,55,0.28)]",
+    borderHover: "hover:border-[#cca043]",
+  },
+  {
+    id: "tourism-culture",
+    title: "Tourism & Culture",
+    icon: FaLandmark,
+    iconBg: "bg-gradient-to-br from-[#e51b24]/20 to-[#d49a37]/20 text-[#f87171] border-red-500/40",
+    glowColor: "group-hover:shadow-[0_12px_32px_rgba(229,27,36,0.28)]",
+    borderHover: "hover:border-red-500/80",
+  },
+  {
+    id: "bihar-food-fest",
+    title: "Bihar Food Fest",
+    icon: FaBowlFood,
+    iconBg: "bg-gradient-to-br from-amber-500/25 to-orange-600/30 text-amber-400 border-amber-500/40",
+    glowColor: "group-hover:shadow-[0_12px_32px_rgba(245,158,11,0.28)]",
+    borderHover: "hover:border-amber-400",
+  },
+  {
+    id: "music-entertainment",
+    title: "Music & Entertainment",
+    icon: FaMusic,
+    iconBg: "bg-gradient-to-br from-rose-500/20 to-purple-600/25 text-rose-400 border-rose-500/40",
+    glowColor: "group-hover:shadow-[0_12px_32px_rgba(244,63,94,0.28)]",
+    borderHover: "hover:border-rose-400",
+  },
+  {
+    id: "community-engagement",
+    title: "Community Engagement",
+    icon: FaUsers,
+    iconBg: "bg-gradient-to-br from-emerald-500/20 to-teal-600/25 text-emerald-400 border-emerald-500/40",
+    glowColor: "group-hover:shadow-[0_12px_32px_rgba(16,185,129,0.28)]",
+    borderHover: "hover:border-emerald-400",
+  },
 ];
 
 const ComingSoonPage = () => {
+  const [selectedDistance, setSelectedDistance] = useState("42.2");
+
   return (
     <div
       style={{ fontFamily: "'Inter','Segoe UI',sans-serif", background: "#ffffff" }}
       className="relative min-h-screen w-full overflow-x-hidden flex flex-col"
     >
 
-      {/* NAVBAR - Transparent floating header */}
-      <header
-        className="absolute top-0 left-0 z-30 w-full px-5 sm:px-10 py-4 flex items-center justify-between"
-        style={{
-          background: "linear-gradient(to bottom, rgba(5,3,1,0.65) 0%, rgba(5,3,1,0) 100%)",
-        }}
-      >
-        <div className="flex items-center gap-3">
-          <div className="bg-white/95 rounded-xl p-1 shadow-lg shadow-black/30 flex items-center justify-center backdrop-blur-sm">
-            <img
-              src="/images/mainLogo.png"
-              alt="Rajgir Marathon Logo"
-              className="h-11 sm:h-14 w-auto object-contain rounded-lg"
-            />
-          </div>
-          <div className="hidden sm:flex flex-col text-left">
-            <span className="text-white font-black text-base sm:text-lg tracking-wider leading-tight">
-              RAJGIR MARATHON
-            </span>
-            <span className="text-[#f4b98a] text-[10px] sm:text-xs font-semibold tracking-widest uppercase">
-              Run Through History
-            </span>
-          </div>
-        </div>
+      {/* NAVBAR COMPONENT */}
+      <ComingSoonHeader isAbsolute={true} />
 
-        <div
-          className="flex items-center px-4 py-1.5"
-          style={{
-            border: "1px solid rgba(255, 255, 255, 0.25)",
-            borderRadius: "999px",
-            background: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(12px)",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.25)"
-          }}
-        >
-          <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-white">
-            Edition 2026
-          </span>
-        </div>
-      </header>
-
-      {/* HERO */}
+      {/* HERO SECTION */}
       <section
-        className="relative flex-1 flex flex-col justify-center items-center overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-16"
-        style={{ minHeight: "100vh" }}
+        id="home"
+        className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden pt-28 sm:pt-32 lg:pt-36 pb-6 sm:pb-8"
       >
         {/* Desktop background image */}
         <div className="absolute inset-0 hidden sm:block">
@@ -130,11 +93,20 @@ const ComingSoonPage = () => {
             alt="Rajgir Marathon Hero Desktop"
             className="w-full h-full object-cover object-center"
           />
-          {/* Centered dark gradient overlay for optimal text contrast across the center */}
+          {/* Directional gradient: dark on left for text readability, clear on right for sunrise & stupa */}
           <div
             className="absolute inset-0"
             style={{
-              background: "radial-gradient(ellipse at center, rgba(5,3,1,0.76) 0%, rgba(5,3,1,0.84) 55%, rgba(5,3,1,0.92) 100%)"
+              background:
+                "linear-gradient(to right, rgba(10,5,3,0.92) 0%, rgba(10,5,3,0.78) 42%, rgba(10,5,3,0.2) 75%, rgba(10,5,3,0.45) 100%)",
+            }}
+          />
+          {/* Top & bottom ambient fade */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.15) 60%, rgba(10,5,3,0.92) 100%)",
             }}
           />
         </div>
@@ -148,180 +120,625 @@ const ComingSoonPage = () => {
           />
           <div
             className="absolute inset-0"
-            style={{ background: "rgba(5,3,1,0.78)" }}
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(10,5,3,0.88) 0%, rgba(10,5,3,0.72) 45%, rgba(10,5,3,0.95) 100%)",
+            }}
           />
         </div>
 
-        {/* ALL CONTENT: centered column */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 py-6 sm:py-8 flex flex-col items-center text-center">
+        {/* TOP HERO CONTENT: 2-COLUMN SPLIT (100% width with left/right margins) */}
+        <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 flex-1 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8 pt-4 sm:pt-6">
           
-          {/* Location chip */}
-          <div
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 mb-4"
-            style={{
-              background: "rgba(255,243,237,0.12)",
-              border: "1px solid rgba(244,185,138,0.45)",
-              borderRadius: "999px",
-              color: "#f4b98a",
-              fontSize: "11px",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
-            <IconMapPin />
-            <span>Rajgir, Bihar, India</span>
+          {/* LEFT COLUMN: Main Typography Image, Coming Soon Brush & Date */}
+          <div className="flex flex-col items-start text-left max-w-2xl xl:max-w-3xl">
+            {/* Hidden H1 for SEO and screen readers */}
+            <h1 className="sr-only">Rajgir Marathon — Run Through History</h1>
+
+            {/* Main Headline Image (Reduced by 140px for sm/md/lg/xl) */}
+            <div className="w-full max-w-[420px] sm:max-w-[400px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[600px] mb-2 sm:mb-3">
+              <img
+                src="/images/rajgir_marathon_heading.png"
+                alt="Rajgir Marathon - Run Through History"
+                className="w-full h-auto object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.95)] filter select-none"
+              />
+            </div>
+
+            {/* COMING SOON BRUSH IMAGE BLOCK (1st attached image) */}
+            <div className="my-1 sm:my-2">
+              <img
+                src="/images/coming_soon_brush.png"
+                alt="Coming Soon"
+                className="w-64 sm:w-80 md:w-96 lg:w-[410px] xl:w-[450px] h-auto object-contain"
+              />
+            </div>
+
+            {/* LOCATION PIN & DATE BAR with Exact Pin Icon */}
+            <div className="flex items-center gap-2.5 mt-2 text-white font-extrabold text-xs sm:text-sm md:text-base tracking-[0.16em] uppercase">
+              <FaMapMarkerAlt className="text-[#e51b24] text-base sm:text-lg shrink-0" />
+              <span className="text-white">RAJGIR, BIHAR, INDIA</span>
+              <span className="text-white/40 font-normal">|</span>
+              <span className="text-white">2027</span>
+            </div>
           </div>
 
-          {/* Tagline */}
-          <p className="text-xs sm:text-sm font-semibold uppercase mb-2" style={{ color: "#f07040", letterSpacing: "0.14em" }}>
-            Run Through 2,500 Years of History
-          </p>
-
-          {/* Main heading */}
-          <div className="mb-2">
-            <h1 className="font-black leading-none tracking-tight mb-1" style={{ fontSize: "clamp(3.2rem,8.5vw,6.5rem)", color: "#ffffff" }}>
-              RAJGIR
-            </h1>
-            <h2 className="font-black leading-none tracking-tight" style={{ fontSize: "clamp(2.6rem,7vw,5rem)", color: "#e8540a" }}>
-              MARATHON
-            </h2>
+          {/* RIGHT COLUMN: "One Run. Many Stories. Infinite Memories." (2nd attached image) */}
+          <div className="w-full lg:w-auto flex justify-center lg:justify-end self-center lg:self-end pb-4 lg:pb-8 lg:pr-4">
+            <img
+              src="/images/one_run_many_stories.png"
+              alt="One Run. Many Stories. Infinite Memories."
+              className="w-60 sm:w-72 md:w-80 lg:w-[340px] xl:w-[400px] h-auto object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.95)]"
+            />
           </div>
+        </div>
 
-          {/* HIGH-VISIBILITY HERO "COMING SOON" SHOWCASE */}
-          <div className="my-6 sm:my-8 flex flex-col items-center">
-            <div
-              className="relative inline-flex items-center justify-center px-6 sm:px-14 py-2.5 sm:py-4"
+        {/* BOTTOM HERO SECTION: 3 ACTION PILLARS + 5 FEATURE BADGES (100% width with left/right margins) */}
+        <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 mt-8 lg:mt-10 flex flex-col gap-4">
+          
+          {/* 3 ACTION PILLARS + HERITAGE BANNER ROW */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            
+            {/* 1: REGISTER AS RUNNER */}
+            <Link
+              to="/contact?tab=runner"
+              className="flex items-center justify-between px-5 py-3.5 rounded-xl border border-red-400/40 text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/50 group cursor-pointer"
               style={{
-                background: "linear-gradient(135deg, #ff6b1a 0%, #e8540a 50%, #c44a00 100%)",
-                border: "2px solid rgba(255, 255, 255, 0.5)",
-                borderRadius: "999px",
-                boxShadow: "0 0 45px rgba(232, 84, 10, 0.8), 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.5)",
-                backdropFilter: "blur(12px)",
+                background: "linear-gradient(135deg, #e51b24 0%, #b7121b 100%)",
               }}
             >
-              <span
-                className="font-black tracking-[0.16em] sm:tracking-[0.22em] uppercase text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.7)]"
-                style={{ fontSize: "clamp(1.15rem, 4vw, 2.5rem)" }}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                  <img
+                    src="/images/icon_runner_card.png"
+                    alt="Runner Icon"
+                    className="w-7 h-7 object-contain drop-shadow"
+                  />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-widest text-white/85 uppercase">
+                    REGISTER AS
+                  </span>
+                  <span className="text-sm sm:text-base font-black tracking-wider uppercase text-white">
+                    RUNNER
+                  </span>
+                </div>
+              </div>
+              <FaChevronRight className="text-white/80 group-hover:translate-x-1 transition-transform text-sm" />
+            </Link>
+
+            {/* 2: REGISTER AS VOLUNTEER */}
+            <Link
+              to="/contact?tab=volunteer"
+              className="flex items-center justify-between px-5 py-3.5 rounded-xl border border-amber-300/40 text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-amber-900/50 group cursor-pointer"
+              style={{
+                background: "linear-gradient(135deg, #d49a37 0%, #a67420 100%)",
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                  <img
+                    src="/images/icon_volunteer_card.png"
+                    alt="Volunteer Icon"
+                    className="w-8 h-7 object-contain drop-shadow"
+                  />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-widest text-white/85 uppercase">
+                    REGISTER AS
+                  </span>
+                  <span className="text-sm sm:text-base font-black tracking-wider uppercase text-white">
+                    VOLUNTEER
+                  </span>
+                </div>
+              </div>
+              <FaChevronRight className="text-white/80 group-hover:translate-x-1 transition-transform text-sm" />
+            </Link>
+
+            {/* 3: BECOME A SPONSOR */}
+            <Link
+              to="/contact?tab=sponsor"
+              className="flex items-center justify-between px-5 py-3.5 rounded-xl border border-[#d49a37]/60 text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-[#d49a37] group cursor-pointer"
+              style={{
+                background: "rgba(18, 16, 15, 0.88)",
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#d49a37]/15 flex items-center justify-center shrink-0">
+                  <img
+                    src="/images/icon_sponsor_card.png"
+                    alt="Sponsor Icon"
+                    className="w-8 h-7 object-contain drop-shadow"
+                  />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#e5a93c] uppercase">
+                    BECOME A
+                  </span>
+                  <span className="text-sm sm:text-base font-black tracking-wider uppercase text-white">
+                    SPONSOR
+                  </span>
+                </div>
+              </div>
+              <FaChevronRight className="text-white/80 group-hover:translate-x-1 transition-transform text-sm" />
+            </Link>
+
+            {/* 4: HERITAGE NATURE BANNER */}
+            <div
+              className="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-[#d49a37]/45 text-white backdrop-blur-md"
+              style={{
+                background: "rgba(18, 16, 15, 0.8)",
+              }}
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#d49a37]/15 flex items-center justify-center shrink-0">
+                <img
+                  src="/images/icon_heritage_card.png"
+                  alt="Heritage Pagoda Icon"
+                  className="w-9 h-9 object-contain drop-shadow-[0_2px_8px_rgba(212,154,55,0.4)]"
+                />
+              </div>
+              <p className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-white/95 leading-snug text-left">
+                EXPERIENCE THE PERFECT BLEND OF HERITAGE, NATURE & SPIRITUALITY
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5 FEATURE BADGES STRIP - Below Hero Section (Strict 2 columns on mobile, 5 in a row on desktop) */}
+      <section
+        id="feature-badges"
+        className="relative z-20 w-full border-t border-b border-[#cca043] py-4 sm:py-5 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20"
+        style={{
+          background: "linear-gradient(180deg, #181411 0%, #110e0c 100%)",
+        }}
+      >
+        <div className="w-full max-w-sm sm:max-w-xl lg:max-w-none mx-auto grid grid-cols-2 lg:flex lg:flex-row lg:items-center lg:justify-between gap-x-4 sm:gap-x-8 gap-y-5 lg:gap-y-0">
+          {[
+            {
+              img: "/images/badge_heritage.png",
+              alt: "Ancient Heritage Route",
+              line1: "ANCIENT",
+              line2: "HERITAGE ROUTE",
+            },
+            {
+              img: "/images/badge_race_mgmt.png",
+              alt: "Professional Race Management",
+              line1: "PROFESSIONAL",
+              line2: "RACE MANAGEMENT",
+            },
+            {
+              img: "/images/badge_rfid.png",
+              alt: "RFID Timing",
+              line1: "RFID",
+              line2: "TIMING",
+            },
+            {
+              img: "/images/badge_medical.png",
+              alt: "Medical Support",
+              line1: "MEDICAL",
+              line2: "SUPPORT",
+            },
+            {
+              img: "/images/badge_hydration.png",
+              alt: "Hydration Stations",
+              line1: "HYDRATION",
+              line2: "STATIONS",
+            },
+          ].map((badge, idx) => (
+            <React.Fragment key={idx}>
+              {idx > 0 && (
+                <div className="hidden lg:block w-[1px] h-7 lg:h-8 bg-[#cca043]/70 shrink-0" />
+              )}
+              <div className="flex items-center gap-2.5 sm:gap-3 justify-start">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0">
+                  <img
+                    src={badge.img}
+                    alt={badge.alt}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-col text-left leading-[1.15]">
+                  <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-extrabold uppercase tracking-wider text-white">
+                    {badge.line1}
+                  </span>
+                  <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-extrabold uppercase tracking-wider text-white">
+                    {badge.line2}
+                  </span>
+                </div>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      {/* ========================================================
+          DUAL CARDS SECTION: BECOME A RUNNER & JOIN TEAM RAJGIR
+          ======================================================== */}
+      <section
+        id="participate-cards"
+        className="relative z-20 w-full py-10 sm:py-14 lg:py-16 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20"
+        style={{
+          background: "linear-gradient(180deg, #110e0c 0%, #0d0a08 50%, #0d0a08 100%)",
+        }}
+      >
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-10 items-stretch">
+          
+          {/* ====================================================
+              CARD 1: BECOME A RUNNER
+              ==================================================== */}
+          <div className="relative w-full rounded-2xl sm:rounded-3xl border-[2.5px] border-[#b91c1c] flex flex-col justify-between bg-white shadow-2xl overflow-hidden">
+            
+            {/* ABOVE DIV: Heading, Distance Selector & Athlete Graphic (Creamish Background) */}
+            <div
+              className="relative w-full p-5 sm:p-7 lg:p-8 pb-0 sm:pb-0 lg:pb-0 flex flex-col justify-between overflow-hidden"
+              style={{ background: "#faf4ea", paddingBottom: 0 }}
+            >
+              {/* Mobile-only right/background image (Zero clipping, full silhouette visible, flush with bottom) */}
+              <img
+                src="/images/runner_athlete.png"
+                alt="Runner"
+                className="sm:hidden absolute right-0 bottom-0 w-auto max-h-[90%] max-w-[50%] object-contain object-bottom object-right select-none pointer-events-none z-0 block align-bottom"
+                style={{ bottom: 0, marginBottom: 0 }}
+              />
+
+              <div className="relative z-10 grid grid-cols-1 sm:grid-cols-12 gap-4 items-end flex-1 w-full">
+                {/* Left Column: Heading, Subtitle & Distance Selector */}
+                <div className="relative z-10 sm:col-span-7 flex flex-col items-start text-left self-start">
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-neutral-900">
+                    BECOME A
+                  </span>
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#b91c1c] tracking-tight leading-none my-1">
+                    RUNNER
+                  </h2>
+                  
+                  {/* Dashed Subtitle */}
+                  <div className="flex items-center gap-2 my-2 text-[#b91c1c] font-black text-xs sm:text-[13px] tracking-[0.14em] uppercase">
+                    <span className="w-4 h-[2px] bg-[#b91c1c]" />
+                    <span className="text-neutral-900 font-extrabold">CHOOSE YOUR DISTANCE</span>
+                    <span className="w-4 h-[2px] bg-[#b91c1c]" />
+                  </div>
+
+                  {/* Distance Selector Pills (Trailing pills layer cleanly above graphic) */}
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-2 pb-1 sm:pb-4">
+                    {[
+                      { dist: "42.2", unit: "KM", label: "" },
+                      { dist: "21.1", unit: "KM", label: "" },
+                      { dist: "10", unit: "KM", label: "" },
+                      { dist: "5", unit: "KM", label: "" },
+                      { dist: "3", unit: "KM", label: "FUN RUN" },
+                    ].map((d) => {
+                      const isSelected = selectedDistance === d.dist;
+                      return (
+                        <button
+                          key={d.dist}
+                          type="button"
+                          onClick={() => setSelectedDistance(d.dist)}
+                          className={`w-11 sm:w-12 h-14 sm:h-16 rounded-lg flex flex-col items-center justify-center transition-all duration-200 cursor-pointer ${
+                            isSelected
+                              ? "bg-[#b91c1c] text-white shadow-md shadow-red-900/40 scale-105 border border-red-400"
+                              : "bg-black text-white hover:bg-neutral-800 border border-neutral-800"
+                          }`}
+                        >
+                          <span className="text-sm sm:text-base font-black leading-tight">
+                            {d.dist}
+                          </span>
+                          <span className="text-[9px] font-extrabold uppercase tracking-wider leading-none mt-0.5">
+                            {d.unit}
+                          </span>
+                          {d.label && (
+                            <span className="text-[6.5px] font-bold tracking-tighter text-white/80 leading-none mt-0.5">
+                              {d.label}
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Right Column: Runner Athlete Graphic (Desktop Only - Flush with bottom) */}
+                <div className="hidden sm:flex sm:col-span-5 relative items-end justify-center sm:justify-end self-end p-0 m-0">
+                  <img
+                    src="/images/runner_athlete.png"
+                    alt="Become a Runner - Athlete Sprinting"
+                    className="w-full max-w-[260px] sm:max-w-none h-auto max-h-[190px] sm:max-h-[220px] lg:max-h-[240px] object-contain object-bottom select-none pointer-events-none block align-bottom"
+                    style={{ marginBottom: 0, display: "block" }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* BELOW DIV: Perks & Action Button (Clean White Background) */}
+            <div className="w-full p-5 sm:p-7 lg:p-8 pt-5 sm:pt-6 bg-white flex flex-col justify-between flex-1">
+              {/* Runner Perks (6 items in 2 columns) */}
+              <div className="grid grid-cols-2 gap-x-3 gap-y-2.5 sm:gap-y-3.5 mb-5 sm:mb-6">
+                {[
+                  { icon: FaMedal, text: "Finisher Medal" },
+                  { icon: FaMapMarkerAlt, text: "Live Tracking" },
+                  { icon: FaTshirt, text: "Premium T-Shirt" },
+                  { icon: FaStopwatch, text: "Professional Timing" },
+                  { icon: FaCertificate, text: "Digital Certificate" },
+                  { icon: FaMusic, text: "Entertainment & More" },
+                ].map((perk, idx) => {
+                  const Icon = perk.icon;
+                  return (
+                    <div key={idx} className="flex items-center gap-2.5 sm:gap-3 text-left">
+                      <Icon className="text-[#b91c1c] text-base sm:text-lg shrink-0" />
+                      <span className="text-xs sm:text-sm font-bold text-neutral-900 tracking-tight leading-tight">
+                        {perk.text}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* CTA Button */}
+              <Link
+                to={`/contact?tab=runner${selectedDistance ? `&distance=${selectedDistance}` : ""}`}
+                className="w-full py-3 sm:py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#991b1b] via-[#b91c1c] to-[#dc2626] text-white font-extrabold tracking-widest text-xs sm:text-sm uppercase flex items-center justify-center gap-2 shadow-lg shadow-red-950/25 hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer"
               >
-                COMING SOON
-              </span>
-            </div>
-            <p className="text-xs sm:text-sm font-extrabold tracking-[0.25em] uppercase text-[#f4b98a] mt-3 drop-shadow-md">
-              Official Registrations Opening Soon
-            </p>
-          </div>
-
-          {/* Sub-tagline pill & Venue */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-            <div className="inline-flex items-center px-4 py-2" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "999px", backdropFilter: "blur(8px)" }}>
-              <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-white">
-                Run Where History Lives
-              </span>
-            </div>
-            <div
-              className="flex items-center gap-2 px-4 py-2"
-              style={{
-                background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                borderRadius: "999px",
-                backdropFilter: "blur(8px)",
-                color: "#ffffff",
-                fontSize: "13px",
-                fontWeight: 600,
-              }}
-            >
-              <span style={{ color: "#e8540a" }}><IconStadium /></span>
-              <span>Rajgir Sports Complex</span>
+                <span>PRE-REGISTER NOW</span>
+                <FaArrowRight className="text-xs sm:text-sm" />
+              </Link>
             </div>
           </div>
 
-          {/* Info cards: side by side, centered */}
-          <div className="w-full max-w-3xl flex flex-col sm:flex-row gap-4 text-left">
-
-            {/* Race Categories */}
+          {/* ====================================================
+              CARD 2: JOIN TEAM RAJGIR
+              ==================================================== */}
+          <div className="relative w-full rounded-2xl sm:rounded-3xl border-[2.5px] border-[#d49a37] flex flex-col justify-between bg-white shadow-2xl overflow-hidden">
+            
+            {/* ABOVE DIV: Heading, Subtitle & Volunteers Graphic (Creamish Background) */}
             <div
-              className="rounded-2xl p-4 flex-1"
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                backdropFilter: "blur(20px)",
-              }}
+              className="relative w-full p-5 sm:p-7 lg:p-8 pb-0 sm:pb-0 lg:pb-0 flex flex-col justify-between overflow-hidden"
+              style={{ background: "#faf4ea", paddingBottom: 0 }}
             >
-              <p className="text-xs font-bold tracking-widest uppercase mb-3 text-center sm:text-left" style={{ color: "rgba(255,255,255,0.45)" }}>
-                Race Categories
-              </p>
-              <div className="grid grid-cols-2 gap-1.5">
-                {raceCategories.map((cat, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col items-start px-2.5 py-2"
-                    style={{
-                      background: "rgba(255,255,255,0.06)",
-                      border: "1px solid rgba(255,255,255,0.09)",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <span className="font-black text-xs leading-tight" style={{ color: "#ffffff" }}>
-                      {cat.dist}
-                    </span>
-                    <span className="text-xs font-medium mt-0.5" style={{ color: "rgba(255,255,255,0.48)" }}>
-                      {cat.name}
-                    </span>
-                  </div>
-                ))}
+              {/* Mobile-only right/background image (Zero clipping, full silhouette visible, flush with bottom) */}
+              <img
+                src="/images/volunteer_team_v2.png"
+                alt="Volunteer Crew"
+                className="sm:hidden absolute right-0 bottom-0 w-auto max-h-[92%] max-w-[54%] object-contain object-bottom object-right select-none pointer-events-none z-0 block align-bottom"
+                style={{ bottom: 0, marginBottom: 0 }}
+              />
+
+              <div className="relative z-10 grid grid-cols-1 sm:grid-cols-12 gap-4 items-end flex-1 w-full">
+                {/* Left Column: Heading & Subtitle */}
+                <div className="relative z-10 sm:col-span-7 flex flex-col items-start text-left self-start pb-1 sm:pb-4">
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-neutral-900">
+                    JOIN TEAM
+                  </span>
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#d49a37] tracking-tight leading-none my-1">
+                    RAJGIR
+                  </h2>
+                  
+                  {/* Subtitle */}
+                  <p className="font-extrabold text-neutral-900 text-xs sm:text-sm tracking-[0.08em] uppercase mt-2.5 leading-snug">
+                    BE THE HEART OF <br /> THE MARATHON
+                  </p>
+                </div>
+
+                {/* Right Column: Volunteers Graphic (Desktop Only - Flush with bottom) */}
+                <div className="hidden sm:flex sm:col-span-5 relative items-end justify-center sm:justify-end self-end p-0 m-0">
+                  <img
+                    src="/images/volunteer_team_v2.png"
+                    alt="Join Team Rajgir - Volunteer Crew"
+                    className="w-full max-w-[280px] sm:max-w-none h-auto max-h-[190px] sm:max-h-[220px] lg:max-h-[245px] object-contain object-bottom select-none pointer-events-none block align-bottom"
+                    style={{ marginBottom: 0, display: "block" }}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Event Highlights */}
-            <div
-              className="rounded-2xl p-4 flex-1"
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                backdropFilter: "blur(20px)",
-              }}
-            >
-              <p className="text-xs font-bold tracking-widest uppercase mb-3 text-center sm:text-left" style={{ color: "rgba(255,255,255,0.45)" }}>
-                Event Highlights
-              </p>
-              <div className="flex flex-col gap-2.5">
-                {highlights.map(({ Icon, label }, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <span
-                      className="flex items-center justify-center w-7 h-7 rounded-lg flex-shrink-0"
-                      style={{ background: "rgba(232,84,10,0.18)", color: "#e8540a" }}
-                    >
-                      <Icon />
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold" style={{ color: "rgba(255,255,255,0.82)" }}>
-                      {label}
-                    </span>
-                  </div>
-                ))}
+            {/* BELOW DIV: Roles & Action Button (Clean White Background) */}
+            <div className="w-full p-5 sm:p-7 lg:p-8 pt-5 sm:pt-6 bg-white flex flex-col justify-between flex-1">
+              {/* Volunteer Roles (10 items in 2 columns) */}
+              <div className="grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-y-2.5 mb-5 sm:mb-6">
+                {[
+                  { icon: FaRunning, text: "Route Marshal" },
+                  { icon: FaStore, text: "Expo & Village" },
+                  { icon: FaClipboardList, text: "Registration Desk" },
+                  { icon: FaVideo, text: "Media Team" },
+                  { icon: FaTint, text: "Hydration Station" },
+                  { icon: FaCamera, text: "Photography" },
+                  { icon: FaMedkit, text: "Medical Support" },
+                  { icon: FaShareAlt, text: "Social Media" },
+                  { icon: FaUserTie, text: "VIP Management" },
+                  { icon: FaFlagCheckered, text: "Finish Line Operations" },
+                ].map((role, idx) => {
+                  const Icon = role.icon;
+                  return (
+                    <div key={idx} className="flex items-center gap-2.5 sm:gap-3 text-left">
+                      <Icon className="text-[#d49a37] text-sm sm:text-base shrink-0" />
+                      <span className="text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-tight">
+                        {role.text}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
+
+              {/* CTA Button */}
+              <Link
+                to="/contact?tab=volunteer"
+                className="w-full py-3 sm:py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#b47a1f] via-[#d49a37] to-[#e0a845] text-white font-extrabold tracking-widest text-xs sm:text-sm uppercase flex items-center justify-center gap-2 shadow-lg shadow-amber-950/25 hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer"
+              >
+                <span>BECOME A VOLUNTEER</span>
+                <FaArrowRight className="text-xs sm:text-sm" />
+              </Link>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* FOOTER - white bg to match logo */}
-      <footer
-        className="relative z-10 px-5 sm:px-10 py-4 flex flex-col sm:flex-row items-center justify-between gap-2"
-        style={{ background: "#ffffff", borderTop: "1px solid #ebe9e4" }}
+      {/* ====================================================
+          SECTION 4: WHY PARTICIPATE? (8 Feature Badges Strip)
+          ==================================================== */}
+      <section
+        id="why-participate"
+        className="relative z-20 w-full py-8 sm:py-12 lg:py-14 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 border-b border-[#cca043]/35"
+        style={{
+          background: "linear-gradient(180deg, #0d0a08 0%, #110e0c 50%, #0d0a08 100%)",
+        }}
       >
-        <p className="text-xs sm:text-sm font-black tracking-widest text-center sm:text-left uppercase">
-          <span style={{ color: "#e8540a" }}>One Run. </span>
-          <span style={{ color: "#1a1410" }}>One Destination. </span>
-          <span style={{ color: "#c44a00" }}>Endless Memories.</span>
-        </p>
-        <div className="flex items-center gap-3 text-xs font-semibold" style={{ color: "#9a8880" }}>
-          <span style={{ color: "#e8540a" }}>#RajgirMarathon</span>
-          <span style={{ color: "#d0cbc7" }}>|</span>
-          <span>&#169; {new Date().getFullYear()} Rajgir Marathon</span>
+        {/* Section Heading with Red Flanking Divider Lines */}
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mb-8 sm:mb-12">
+          <span className="flex-1 h-[1.5px] bg-[#991b1b] max-w-[60px] sm:max-w-[160px] md:max-w-[240px]" />
+          <h2 className="text-sm sm:text-base md:text-lg font-black tracking-[0.2em] sm:tracking-[0.25em] text-white uppercase px-2 text-center whitespace-nowrap">
+            WHY PARTICIPATE?
+          </h2>
+          <span className="flex-1 h-[1.5px] bg-[#991b1b] max-w-[60px] sm:max-w-[160px] md:max-w-[240px]" />
         </div>
-      </footer>
+
+        {/* 8 Feature Badges: 4 cols on mobile/tablet (2 rows of 4), 8 flex items on desktop */}
+        <div className="grid grid-cols-4 lg:flex lg:items-center lg:justify-between gap-y-7 sm:gap-y-9 gap-x-2 sm:gap-x-4">
+          {[
+            {
+              title: "SCENIC\nROUTE",
+              image: "/images/why_scenic_route.png",
+              alt: "Scenic Route",
+            },
+            {
+              title: "WORLD CLASS\nEVENT",
+              image: "/images/why_world_class.png",
+              alt: "World Class Event",
+            },
+            {
+              title: "FINISHER\nMEDAL",
+              image: "/images/why_finisher_medal.png",
+              alt: "Finisher Medal",
+            },
+            {
+              title: "PREMIUM\nT-SHIRT",
+              image: "/images/why_premium_tshirt.png",
+              alt: "Premium T-Shirt",
+            },
+            {
+              title: "RFID\nTIMING",
+              image: "/images/badge_rfid.png",
+              alt: "RFID Timing",
+            },
+            {
+              title: "MEDICAL\nSUPPORT",
+              image: "/images/badge_medical.png",
+              alt: "Medical Support",
+            },
+            {
+              title: "FAMILY\nEXPERIENCE",
+              image: "/images/why_family_experience.png",
+              alt: "Family Experience",
+            },
+            {
+              title: "LOCAL TOURISM\nEXPERIENCE",
+              image: "/images/why_tourism_camera.png",
+              alt: "Local Tourism Experience",
+            },
+          ].map((item, idx, arr) => (
+            <React.Fragment key={idx}>
+              <div className="flex flex-col items-center justify-start text-center group cursor-pointer lg:flex-1 px-1">
+                {/* Icon Container */}
+                <div className="h-10 sm:h-12 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="h-8 sm:h-10 md:h-11 w-auto max-w-[56px] object-contain select-none pointer-events-none"
+                  />
+                </div>
+
+                {/* Badge Title */}
+                <p className="text-[9.5px] sm:text-[11px] md:text-xs font-black uppercase text-center text-white tracking-wider leading-tight whitespace-pre-line mt-2 sm:mt-3 group-hover:text-[#cca043] transition-colors">
+                  {item.title}
+                </p>
+              </div>
+
+              {/* Vertical Divider for Desktop Only */}
+              {idx < arr.length - 1 && (
+                <div className="hidden lg:block w-[1px] h-10 bg-[#cca043]/20 self-center shrink-0" />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      {/* ====================================================
+          SECTION 5: EVENT HIGHLIGHTS
+          ==================================================== */}
+      <section
+        id="event-highlights"
+        className="relative z-20 w-full py-12 sm:py-16 lg:py-20 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 overflow-hidden"
+        style={{
+          background: "linear-gradient(180deg, #0d0a08 0%, #15100c 50%, #0d0a08 100%)",
+        }}
+      >
+        {/* Navigation anchor support */}
+        <span id="experience" className="absolute -top-24" />
+        <span id="explore" className="absolute -top-24" />
+
+        {/* Ambient Top Golden Border */}
+        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#cca043]/45 to-transparent" />
+
+        {/* Subtle Ambient Glows */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[320px] bg-[#cca043]/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[320px] bg-[#991b1b]/8 rounded-full blur-[150px] pointer-events-none" />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center text-center">
+
+          {/* Main Section Heading */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight font-graduate leading-tight">
+            EVENT <span className="text-[#cca043]">HIGHLIGHTS</span>
+          </h2>
+
+          {/* Decorative Divider */}
+          <div className="flex items-center justify-center gap-3 my-3 sm:my-4 mb-8 sm:mb-10">
+            <span className="w-10 sm:w-16 h-[2px] bg-gradient-to-r from-transparent to-[#e51b24]" />
+            <span className="w-2.5 h-2.5 rotate-45 border border-[#cca043] bg-[#b91c1c] shadow-sm shadow-red-900/50" />
+            <span className="w-10 sm:w-16 h-[2px] bg-gradient-to-l from-transparent to-[#e51b24]" />
+          </div>
+
+          {/* 5 EVENT HIGHLIGHT CARDS (Desktop: 5 Columns, Tablet: 2/3 cols, Mobile: 2 cols) */}
+          <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-3.5 xl:gap-5 items-stretch">
+            {eventHighlights.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.id}
+                  className={`group relative rounded-2xl bg-[#14100c]/90 hover:bg-[#1b1510] border border-white/10 ${item.borderHover} transition-all duration-300 py-6 px-3.5 sm:py-8 sm:px-5 flex flex-col items-center justify-center text-center shadow-xl ${item.glowColor} hover:-translate-y-2 cursor-pointer overflow-hidden ${
+                    idx === 4 ? "col-span-2 sm:col-span-1 lg:col-span-1" : ""
+                  }`}
+                >
+                  {/* Card Background Ambient Radial Glow on Hover */}
+                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-[#cca043]/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                  {/* Icon Container */}
+                  <div className="mb-3.5 sm:mb-4 relative z-10">
+                    <div
+                      className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl border flex items-center justify-center text-2xl sm:text-3xl transition-all duration-300 group-hover:scale-110 shadow-lg shrink-0 ${item.iconBg}`}
+                    >
+                      <Icon />
+                    </div>
+                  </div>
+
+                  {/* Title Only */}
+                  <h3 className="relative z-10 text-xs sm:text-sm lg:text-[14px] xl:text-[15px] font-black uppercase text-white tracking-wide leading-snug group-hover:text-[#cca043] transition-colors font-graduate">
+                    {item.title}
+                  </h3>
+
+                  {/* Bottom Accent Hover Line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#e51b24] via-[#cca043] to-[#e51b24] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Ambient Bottom Golden Border */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#cca043]/30 to-transparent" />
+      </section>
+
+      {/* ====================================================
+          COMING SOON FOOTER COMPONENT
+          ==================================================== */}
+      <ComingSoonFooter />
     </div>
   );
 };

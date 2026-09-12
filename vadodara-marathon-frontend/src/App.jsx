@@ -2,6 +2,7 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ComingSoonPage from "./pages/ComingSoonPage";
+import ComingSoonContactPage from "./pages/ComingSoonContactPage";
 import VmEditions from "./pages/VmEditions/Vm_editions";
 import TwelfthEdition from "./pages/VmEditions/Tab/12thedition";
 import EleventhEdition from "./pages/VmEditions/Tab/11thedition";
@@ -37,7 +38,7 @@ import Sponsor from "./pages/JoinTheTeam/Tab/Sponsor";
 import PrivacyNotice from "./Component/Footer/PrivacyNotice";
 import FAQAccordion from "./Component/Footer/FAQs";
 import TermsAndConditions from "./Component/Footer/TermsAndConditions";
-import Contact from "./Component/Footer/Contact";
+// import Contact from "./Component/Footer/Contact";
 import PastEvents from "./Component/Footer/PastEvents";
 
 import Gallery from "./Component/Footer/Gallery/Gallery";
@@ -163,7 +164,7 @@ function App() {
         <Route path="/price-chart" element={<PriceChart />} />
         <Route path="/faqs" element={<FAQAccordion />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<ComingSoonContactPage />} />
         <Route path="/past-events" element={<PastEvents />} />
         <Route path="/gallery" element={<Gallery />}>
           <Route index element={<Year2020 />} />
