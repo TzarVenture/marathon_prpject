@@ -3,21 +3,14 @@ import { useSearchParams } from "react-router-dom";
 import ComingSoonHeader from "../Component/ComingSoonHeader";
 import ComingSoonFooter from "../Component/Footer/ComingSoonFooter";
 import {
-  FaEnvelope,
-  FaPhoneAlt,
   FaMapMarkerAlt,
-  FaGlobe,
   FaRunning,
   FaHandsHelping,
   FaBriefcase,
   FaCommentDots,
   FaCheckCircle,
   FaArrowRight,
-  FaInstagram,
-  FaFacebookF,
-  FaYoutube,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 
 const roleOptions = [
   { id: "runner", label: "Runner", icon: FaRunning },
@@ -311,151 +304,12 @@ const ComingSoonContactPage = () => {
       </section>
 
       {/* COMPACT MAIN SECTION */}
-      <main className="relative z-10 w-full px-4 sm:px-6 md:px-8 pb-12 sm:pb-16 flex-1">
-        <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-7 items-start">
+      <main className="relative z-10 w-full px-4 sm:px-6 md:px-8 pb-12 sm:pb-16 flex-1 flex justify-center">
+        <div className="w-full max-w-[585px] mx-auto">
+          <div className="w-full rounded-2xl border border-[#cca043]/35 bg-[#0f0c09]/95 backdrop-blur-md p-5 sm:p-6 lg:p-7 shadow-xl relative">
 
-          {/* ====================================================
-              LEFT COLUMN: CONTACT CHANNELS (COMPACT)
-              ==================================================== */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="w-full rounded-2xl border border-[#cca043]/30 bg-[#0f0c09]/90 backdrop-blur-md p-5 sm:p-6 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-28 h-28 bg-[#cca043]/10 rounded-full blur-3xl pointer-events-none" />
-
-              <h2 className="text-base sm:text-lg font-extrabold uppercase tracking-wider text-[#d49a37] mb-1.5 font-graduate">
-                GET IN TOUCH
-              </h2>
-              <p className="text-neutral-300 text-xs mb-4 leading-relaxed">
-                Connect directly with the official Rajgir Marathon organizing committee for any inquiries.
-              </p>
-
-              <div className="flex flex-col gap-3">
-                {/* Email Item */}
-                <a
-                  href="mailto:rajgirmarathon@gmail.com"
-                  className="flex items-center gap-3 group p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 hover:border-[#cca043]/40 transition-all"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-[#cca043]/15 border border-[#cca043]/30 text-[#cca043] flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
-                    <FaEnvelope />
-                  </div>
-                  <div className="flex flex-col text-left min-w-0">
-                    <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">
-                      Official Email
-                    </span>
-                    <span className="text-xs sm:text-[13px] font-semibold text-white group-hover:text-[#cca043] transition-colors truncate">
-                      rajgirmarathon@gmail.com
-                    </span>
-                  </div>
-                </a>
-
-                {/* Phone Item */}
-                <a
-                  href="tel:+918882520326"
-                  className="flex items-center gap-3 group p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 hover:border-[#cca043]/40 transition-all"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-[#cca043]/15 border border-[#cca043]/30 text-[#cca043] flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
-                    <FaPhoneAlt />
-                  </div>
-                  <div className="flex flex-col text-left min-w-0">
-                    <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">
-                      Helpline
-                    </span>
-                    <span className="text-xs sm:text-[13px] font-semibold text-white group-hover:text-[#cca043] transition-colors">
-                      +91 8882520326
-                    </span>
-                  </div>
-                </a>
-
-                {/* Website Item */}
-                <a
-                  href="https://www.rajgirmarathon.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-3 group p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 hover:border-[#cca043]/40 transition-all"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-[#cca043]/15 border border-[#cca043]/30 text-[#cca043] flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition-transform">
-                    <FaGlobe />
-                  </div>
-                  <div className="flex flex-col text-left min-w-0">
-                    <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">
-                      Website
-                    </span>
-                    <span className="text-xs sm:text-[13px] font-semibold text-white group-hover:text-[#cca043] transition-colors">
-                      www.rajgirmarathon.com
-                    </span>
-                  </div>
-                </a>
-
-                {/* Location Item */}
-                <div className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                  <div className="w-9 h-9 rounded-lg bg-[#cca043]/15 border border-[#cca043]/30 text-[#cca043] flex items-center justify-center text-sm shrink-0">
-                    <FaMapMarkerAlt />
-                  </div>
-                  <div className="flex flex-col text-left min-w-0">
-                    <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">
-                      Marathon Circuit
-                    </span>
-                    <span className="text-xs sm:text-[13px] font-semibold text-white">
-                      Rajgir, Nalanda, Bihar, India
-                    </span>
-                  </div>
-                </div>
-
-                {/* Official Social Channels */}
-                <div className="pt-3 border-t border-white/10 mt-1">
-                  <span className="block text-[10px] uppercase font-bold text-neutral-400 tracking-wider mb-2.5 text-left">
-                    Follow Official Channels
-                  </span>
-                  <div className="flex items-center gap-2.5">
-                    <a
-                      href="https://www.instagram.com/rajgirmarathon"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Instagram"
-                      className="w-9 h-9 rounded-lg bg-[#cca043]/10 hover:bg-[#cca043]/20 border border-[#cca043]/30 text-[#cca043] hover:text-white flex items-center justify-center text-sm transition-all hover:scale-105"
-                    >
-                      <FaInstagram />
-                    </a>
-                    <a
-                      href="https://x.com/Rajgirmarathon"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Twitter / X"
-                      className="w-9 h-9 rounded-lg bg-[#cca043]/10 hover:bg-[#cca043]/20 border border-[#cca043]/30 text-[#cca043] hover:text-white flex items-center justify-center text-xs transition-all hover:scale-105"
-                    >
-                      <FaXTwitter />
-                    </a>
-                    <a
-                      href="https://www.youtube.com/@rajgirmarathon"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="YouTube"
-                      className="w-9 h-9 rounded-lg bg-[#cca043]/10 hover:bg-[#cca043]/20 border border-[#cca043]/30 text-[#cca043] hover:text-white flex items-center justify-center text-sm transition-all hover:scale-105"
-                    >
-                      <FaYoutube />
-                    </a>
-                    <a
-                      href="https://facebook.com/rajgirmarathon"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Facebook"
-                      className="w-9 h-9 rounded-lg bg-[#cca043]/10 hover:bg-[#cca043]/20 border border-[#cca043]/30 text-[#cca043] hover:text-white flex items-center justify-center text-xs transition-all hover:scale-105"
-                    >
-                      <FaFacebookF />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ====================================================
-              RIGHT COLUMN: COMPACT UNIFIED CONTACT FORM
-              ==================================================== */}
-          <div className="lg:col-span-7">
-            <div className="w-full rounded-2xl border border-[#cca043]/35 bg-[#0f0c09]/95 backdrop-blur-md p-5 sm:p-6 lg:p-7 shadow-xl relative">
-
-              {/* Form Heading: Static Yellow Badge & Description, Dynamic Heading */}
-              <div className="text-left mb-4">
+            {/* Form Heading: Static Yellow Badge & Description, Dynamic Heading */}
+            <div className="text-left mb-4">
                 <span className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d49a37]">
                   CONNECT WITH US
                 </span>
@@ -777,8 +631,6 @@ const ComingSoonContactPage = () => {
               )}
 
             </div>
-          </div>
-
         </div>
       </main>
 

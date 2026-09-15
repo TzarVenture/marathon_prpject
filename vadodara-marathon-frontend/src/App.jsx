@@ -66,6 +66,7 @@ import EventDetails from "./pages/Events/EventDetails";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchSiteSettings } from "./services/marathonApi";
+import ScrollToTop from "./Component/ScrollToTop";
 
 function App() {
   useEffect(() => {
@@ -100,6 +101,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <ToastContainer
         position="top-right"
         autoClose={3000}

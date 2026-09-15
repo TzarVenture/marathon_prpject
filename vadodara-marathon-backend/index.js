@@ -61,7 +61,9 @@ const allowed_origin = [
     "http://localhost:3000",
     "http://187.127.155.47:4000",
     "https://rajgirmarathon.com",
+    "https://www.rajgirmarathon.com",
     "https://rajgir.org",
+    "https://www.rajgir.org",
 ]
 
 app.use(cors({

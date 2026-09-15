@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   FaInstagram,
   FaFacebookF,
@@ -9,6 +10,7 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
   FaCheck,
+  FaChevronRight,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -16,6 +18,34 @@ const ComingSoonFooter = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const navItems = [
+    { label: "Run", href: "/contact?tab=runner", isRoute: true },
+    { label: "Race info", href: "/contact?tab=general", isRoute: true },
+    { label: "Explore", href: isHomePage ? "#explore" : "/#explore", isRoute: !isHomePage },
+    { label: "Experience", href: isHomePage ? "#experience" : "/#experience", isRoute: !isHomePage },
+    { label: "Sponsors", href: "/contact?tab=sponsor", isRoute: true },
+    { label: "A Healthier Tomorrow", href: isHomePage ? "#healthier-tomorrow" : "/#healthier-tomorrow", isRoute: !isHomePage },
+    { label: "#rajgirmarathon", href: isHomePage ? "#rajgirmarathon" : "/#rajgirmarathon", isRoute: !isHomePage },
+    { label: "Contact Us", href: "/contact", isRoute: true },
+  ];
+
+  const handleNavClick = (item) => {
+    if (item.isRoute) {
+      window.scrollTo(0, 0);
+    } else {
+      const targetId = item.href.replace(/^#/, "");
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+  };
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -50,14 +80,14 @@ const ComingSoonFooter = () => {
       {/* Top Heritage Golden Border Line */}
       <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#cca043]/40 to-transparent" />
 
-      {/* Main 3-Column Content Container (100% Full Width with Symmetrical Spacing) */}
+      {/* Main 4-Column Content Container (100% Full Width with Symmetrical Spacing) */}
       <div className="w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-12 lg:py-14">
-        <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-6">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 xl:gap-8 items-start">
           
           {/* ====================================================
-              COLUMN 1: STAY CONNECTED (Left Column - Symmetric Width)
+              COLUMN 1: STAY CONNECTED (Subscribe & Socials)
               ==================================================== */}
-          <div className="order-2 lg:order-1 w-full lg:w-[280px] xl:w-[300px] shrink-0 flex flex-col items-start text-left">
+          <div className="w-full flex flex-col items-start text-left">
             <h3 className="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-[#d49a37]">
               STAY CONNECTED
             </h3>
@@ -113,7 +143,7 @@ const ComingSoonFooter = () => {
             )}
 
             {/* Social Media Circular Badges (5 white circles) */}
-            <div className="flex items-center gap-2.5 sm:gap-3 mt-4 sm:mt-5">
+            <div className="flex items-center gap-2 sm:gap-2.5 mt-4 sm:mt-5">
               {[
                 {
                   icon: FaInstagram,
@@ -159,20 +189,60 @@ const ComingSoonFooter = () => {
           </div>
 
           {/* ====================================================
-              COLUMN 2: CENTER ARTWORK ("Run Through History")
+              COLUMN 2: QUICK LINKS (All 7 Header Navigation Links)
               ==================================================== */}
-          <div className="order-1 lg:order-2 flex items-center justify-center px-2 py-1 flex-1 max-w-[340px] sm:max-w-[370px] lg:max-w-[400px]">
+          <div className="w-full flex flex-col items-start text-left">
+            <h3 className="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-[#d49a37] mb-2 sm:mb-2.5">
+              QUICK LINKS
+            </h3>
+            <div className="flex flex-col gap-1.5 sm:gap-2 text-xs sm:text-[13px] text-neutral-200">
+              {navItems.map((item) => {
+                const linkClass =
+                  "flex items-center gap-1.5 text-neutral-300 hover:text-[#d49a37] transition-colors duration-200 group py-0.5 cursor-pointer";
+                const chevron = (
+                  <FaChevronRight className="text-[8px] text-[#cca043]/70 group-hover:text-[#cca043] group-hover:translate-x-0.5 transition-all shrink-0" />
+                );
+
+                return item.isRoute ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => handleNavClick(item)}
+                    className={linkClass}
+                  >
+                    {chevron}
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => handleNavClick(item)}
+                    className={linkClass}
+                  >
+                    {chevron}
+                    <span className="font-medium">{item.label}</span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ====================================================
+              COLUMN 3: CENTER ARTWORK ("Run Through History")
+              ==================================================== */}
+          <div className="w-full flex flex-col items-center justify-center px-2 py-1">
             <img
               src="/images/footer_run_through_history.png"
               alt="Rajgir Marathon - Run Through History"
-              className="w-full h-auto object-contain select-none pointer-events-none"
+              className="w-full max-w-[260px] sm:max-w-[300px] lg:max-w-none h-auto object-contain select-none pointer-events-none"
             />
           </div>
 
           {/* ====================================================
-              COLUMN 3: ORGANISED BY & CONTACT DETAILS (Right Column - Symmetric Width)
+              COLUMN 4: ORGANISED BY & CONTACT DETAILS
               ==================================================== */}
-          <div className="order-3 lg:order-3 w-full lg:w-[280px] xl:w-[300px] shrink-0 flex flex-col items-start text-left">
+          <div className="w-full flex flex-col items-start text-left">
             <h3 className="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-[#d49a37] mb-2 sm:mb-2.5">
               ORGANISED BY
             </h3>
