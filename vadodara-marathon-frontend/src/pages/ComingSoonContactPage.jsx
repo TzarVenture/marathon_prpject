@@ -95,8 +95,14 @@ const ComingSoonContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // Target recipient email (easily configurable)
-  const RECIPIENT_EMAIL = "rajgirmarathon@gmail.com";
+  // Target recipient email (loaded from environment variable)
+  const RECIPIENT_EMAIL =
+    process.env.REACT_APP_CONTACT_RECIPIENT_EMAIL || "rajgirmarathon@gmail.com";
+
+  // Google Sheets Webhook for Live Excel Lead Capture (loaded from environment variable)
+  const GOOGLE_SHEET_WEBHOOK_URL =
+    process.env.REACT_APP_GOOGLE_SHEET_WEBHOOK_URL ||
+    "https://script.google.com/macros/s/AKfycbxCdMUo3kdmjtEfdje7tmodDtbGBp_Zr-6tqZqFSAGDMYNhy51sa0d-xQ_nFunvWOOo/exec";
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -225,30 +231,77 @@ const ComingSoonContactPage = () => {
 
       payload["Message"] = formData.message;
 
-      // FormSubmit special controls for clean delivery
-      payload["_subject"] = `Rajgir Marathon [${activeRoleLabel}] Enquiry: ${formData.name}`;
-      payload["_template"] = "table";
-      payload["_captcha"] = "false";
+      // Build distinct payloads for email vs sheet
+      const emailPayload = {
+        ...payload,
+        _subject: `Rajgir Marathon [${activeRoleLabel}] Enquiry: ${formData.name}`,
+        _template: "table",
+        _captcha: "false",
+      };
 
-      const response = await fetch(`https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      // 1. Email Submission (FormSubmit) - Runs independently
+      const sendEmail = async () => {
+        try {
+          const response = await fetch(`https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(emailPayload),
+          });
+          const data = await response.json();
+          if (response.ok && (data.success === "true" || data.success === true)) {
+            return { success: true };
+          }
+          return { success: false, error: data.message || "Email delivery failed" };
+        } catch (err) {
+          return { success: false, error: err.message };
+        }
+      };
 
-      const data = await response.json();
+      // 2. Google Sheets Live Excel Webhook - Runs independently
+      const sendToGoogleSheet = async () => {
+        try {
+          await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify(payload),
+            mode: "no-cors",
+          });
+          return { success: true };
+        } catch (err) {
+          return { success: false, error: err.message };
+        }
+      };
 
-      if (response.ok && (data.success === "true" || data.success === true)) {
+      // Execute both concurrently so neither blocks the other
+      const [emailRes, sheetRes] = await Promise.allSettled([
+        sendEmail(),
+        sendToGoogleSheet(),
+      ]);
+
+      const emailSuccess = emailRes.status === "fulfilled" && emailRes.value.success;
+      const sheetSuccess = sheetRes.status === "fulfilled" && sheetRes.value.success;
+
+      // If at least one channel succeeds, consider the lead successfully captured
+      if (emailSuccess || sheetSuccess) {
         setSubmitted(true);
+        if (!emailSuccess) {
+          console.warn("Notice: Email notification encountered an issue, but lead was recorded in Google Sheets:", emailRes.value?.error);
+        }
+        if (!sheetSuccess) {
+          console.warn("Notice: Google Sheets sync encountered an issue, but lead was emailed:", sheetRes.value?.error);
+        }
       } else {
-        setSubmitError(data.message || "Failed to submit enquiry. Please try again.");
+        const errorMsg = emailRes.value?.error || sheetRes.value?.error || "Failed to submit enquiry. Please try again.";
+        setSubmitError(errorMsg);
       }
     } catch (err) {
       console.error("Submission error:", err);
-      setSubmitError("Failed to connect to email service. Please check your internet connection.");
+      setSubmitError("Failed to submit enquiry. Please check your internet connection.");
     } finally {
       setIsSubmitting(false);
     }
